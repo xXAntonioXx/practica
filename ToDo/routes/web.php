@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('main');
-});
+Route::get('/', 'PrincipalController@Cargar');
+Route::post('/create', 'PrincipalController@Crear');

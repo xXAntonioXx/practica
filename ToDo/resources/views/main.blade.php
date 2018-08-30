@@ -10,9 +10,12 @@
 <body>
 	<div class="principal">
 		<div class="wrap">
-			<form class="formulario" action="">
-				<input type="text" id="tareaInput" placeholder="Agrega tu tarea">
-				<input type="button" class="boton" id="btn-agregar" value="Agregar Tarea">
+			<form class="formulario" action="/create" method="post">
+
+				{{csrf_field()}}
+
+				<input type="text" name="tareaInput" placeholder="Agrega tu tarea">
+				<input type="submit" class="boton" id="btn-agregar" value="Agregar Tarea">
 			</form>
 		</div>
 	</div>
@@ -20,9 +23,9 @@
 	<div class="tareas">
 		<div class="wrap">
 			<ul class="lista" id="lista">
-				<li><a href="#">1 Lorem ipsum dolor sit amet.</a></li>
-				<li><a href="#">2 Lorem ipsum dolor sit amet.</a></li>
-				<li><a href="#">3 Lorem ipsum dolor sit amet.</a></li>
+				@foreach($lista as $pendiente)
+					<li><a href="#">{{$pendiente}}</a></li>
+				@endforeach
 			</ul>
 		</div>
 	</div>
