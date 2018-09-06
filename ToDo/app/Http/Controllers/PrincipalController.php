@@ -3,29 +3,41 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Pendiente;
 
 class PrincipalController extends Controller
 {
-	public $IDES=3;
 
-	public $contenido=[
-
-    		0=>'este es el pendiente1',
-    		1=>'este es el pendiente2',
-    		2=>'este es el pendiente3',
-
-    	];
-
+	//public $contenido=Pendiente::all();
 
     public function Cargar(){
 
-    	return view('main',['lista'=>$this->contenido,]);
+    	$contenido=Pendiente::all();
+
+    	return view('main',['lista'=>$contenido,]);
     }
 
     public function Crear(Request $req){
 
-    	$this->contenido[$this->IDES]=$req->tareaInput;
-    	$this->IDES++;
-    	return view('main',['lista'=>$this->contenido,]);
+    	$this->validate($req,[
+    		'tareaInput'=>'required'
+    	]);
+
+    	$pendiente = Pendiente::create([
+    		'pendiente'=>$req['tareaInput']
+    	]);
+
+    	return redirect('/');
+
+    	//primero vamos a intentar hacer la validacion de datos
+    	//el pendiente no debe ser mas largo que 150 chars.
+    	
+    	
+    }
+
+    public function Borrar($ID){
+
+    	Pendiente::where('id',$ID)->delete();
+    	return redirect('/');
     }
 }

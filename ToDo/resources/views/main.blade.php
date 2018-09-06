@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="https://necolas.github.io/normalize.css/3.0.2/normalize.css">
 	<title>Lista de Tareas</title>
 </head>
+<!--este es un script de js para ver si puedo redirigir con javascript-->
 <body>
 	<div class="principal">
 		<div class="wrap">
@@ -19,12 +20,14 @@
 			</form>
 		</div>
 	</div>
- 
+ 	{{$idIndex=1}}
 	<div class="tareas">
 		<div class="wrap">
+			
 			<ul class="lista" id="lista">
 				@foreach($lista as $pendiente)
-					<li><a href="#">{{$pendiente}}</a></li>
+					<li><a href="/delete/{{$pendiente->id}}" >{{$idIndex++}}- {{$pendiente->pendiente}}</a></li>
+					
 				@endforeach
 			</ul>
 		</div>
