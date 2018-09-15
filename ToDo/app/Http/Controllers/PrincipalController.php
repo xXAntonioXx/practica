@@ -14,7 +14,8 @@ class PrincipalController extends Controller
 
     	$contenido=Pendiente::all();
 
-    	return view('main',['lista'=>$contenido,]);
+    	//return view('welcome',['lista'=>$contenido,]);
+        return view('welcome');
     }
 
     public function Crear(Request $req){
@@ -39,5 +40,11 @@ class PrincipalController extends Controller
 
     	Pendiente::where('id',$ID)->delete();
     	return redirect('/');
+    }
+
+    public function respuesta(){
+        $contenido=Pendiente::all();
+
+        return $contenido;
     }
 }

@@ -14,3 +14,4 @@
 Route::get('/', 'PrincipalController@Cargar');
 Route::post('/create', 'PrincipalController@Crear');
 Route::get('/delete/{id}','PrincipalController@Borrar');
+Route::get('/api/pendientes','PrincipalController@respuesta');
