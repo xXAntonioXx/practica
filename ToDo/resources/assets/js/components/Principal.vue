@@ -1,6 +1,10 @@
 <template>
 	<div>
 		<h2>pagina Principal</h2>
+
+		<div v-for="pendiente in pendientes">
+			<p>{{pendiente.pendiente}}</p>
+		</div>
 	</div>
 </template>
 

@@ -14,7 +14,7 @@ class PrincipalController extends Controller
 
     	$contenido=Pendiente::all();
 
-    	//return view('welcome',['lista'=>$contenido,]);
+    	//return view('main',['lista'=>$contenido,]);
         return view('welcome');
     }
 
