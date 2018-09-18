@@ -16,7 +16,7 @@
         
         </style>
     </head>
-    <body>
+    <body style="margin:0">
 
         <div id="main">
             <principal></principal>

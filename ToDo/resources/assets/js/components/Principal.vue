@@ -9,28 +9,40 @@
 					<input type="button" @click="agregar(nuevo_Pendiente)" class="boton" id="btn-agregar" value="Agregar Tarea">
 				</form>
 			</div>
+			
 		</div>
-
-		<div v-for="pendiente in pendientes">
-			<p>{{pendiente}}</p>
+		<div class="tareas">
+			<div class="wrap">
+				<ul id="listaDePendientes" class="lista">
+					<li v-for="pendiente in pendientes">
+						<a @click="eliminar(pendiente.id)">
+							{{pendiente.pendiente}}
+						</a>
+					</li>
+				</ul>
+			</div>
 		</div>
+		
 	</div>
 </template>
 
-<style scoped src="C:/Users/Jose Antonio G/Desktop/sistema de llaves/practica/ToDo/resources/assets/css/estilo_principal.css">	
+<style scoped src="../../css/estilo_principal.css">	
 </style>
 
 <script>
 	export default{
 		data(){
 			return {
-				pendientes:[],
+				pendientes:{},
+				nuevo_Pendiente:'',
+				//nuevoElemento:false,
 			}
 		},
 
 		created(){
 			this.fetchPendientes();
 		},
+
 		methods: {
 			fetchPendientes(){
 				fetch('api/pendientes')
@@ -40,7 +52,18 @@
 				})
 			},
 			agregar(mensaje){
-				axios.post('/create',{'tareaInput':mensaje});
+				axios.post('/create',{'tareaInput':mensaje})
+					.then(()=>{
+						this.fetchPendientes();
+					});
+				//this.nuevoElemento=true;
+			},
+			eliminar(mensajeID){
+				let ruta=`/delete/${mensajeID}`;
+				axios.get(ruta)
+					.then(()=>{
+						this.fetchPendientes();
+					});
 			}
 
 		}

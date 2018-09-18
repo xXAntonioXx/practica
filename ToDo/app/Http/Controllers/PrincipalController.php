@@ -12,7 +12,8 @@ class PrincipalController extends Controller
 
     public function Cargar(){
 
-    	$contenido=Pendiente::all();
+        //cuando uses blade usa la conexion que esta aqui abajo comentada
+    	//$contenido=Pendiente::all();
 
     	//return view('main',['lista'=>$contenido,]);
         return view('welcome');
@@ -28,7 +29,7 @@ class PrincipalController extends Controller
     		'pendiente'=>$req['tareaInput']
     	]);
 
-    	return redirect('/');
+    	//return redirect('/');
 
     	//primero vamos a intentar hacer la validacion de datos
     	//el pendiente no debe ser mas largo que 150 chars.
@@ -39,7 +40,9 @@ class PrincipalController extends Controller
     public function Borrar($ID){
 
     	Pendiente::where('id',$ID)->delete();
-    	return redirect('/');
+
+        //cuando estes usando blade descomenta el ruturn de abajo para usar este metodo y que redireccione a la pagina principal
+    	//return redirect('/');
     }
 
     public function respuesta(){

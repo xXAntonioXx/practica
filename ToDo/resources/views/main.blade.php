@@ -23,7 +23,6 @@
  	{{$idIndex=1}}
 	<div class="tareas">
 		<div class="wrap">
-			
 			<ul class="lista" id="lista">
 				@foreach($lista as $pendiente)
 					<li><a href="/delete/{{$pendiente->id}}" >{{$idIndex++}}- {{$pendiente->pendiente}}</a></li>
