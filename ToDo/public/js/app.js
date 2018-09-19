@@ -47416,6 +47416,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			axios.get(ruta).then(function () {
 				_this3.fetchPendientes();
 			});
+		},
+		noop: function noop() {
+			console.log('nelson dijo el mandela');
 		}
 	}
 });
@@ -47435,7 +47438,12 @@ var render = function() {
           "form",
           {
             staticClass: "formulario",
-            attrs: { action: "/create", method: "post" }
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                _vm.agregar(_vm.nuevo_Pendiente)
+              }
+            }
           },
           [
             _c("input", {

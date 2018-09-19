@@ -3,9 +3,9 @@
 	<div>
 		<div class="principal">
 			<div class="wrap">
-				<form class="formulario" action="/create" method="post">
+				<form class="formulario" v-on:submit.prevent="agregar(nuevo_Pendiente)">
 
-					<input type="text" name="tareaInput" placeholder="Agrega tu tarea" v-model="nuevo_Pendiente">
+					<input type="text" name="tareaInput" placeholder="Agrega tu tarea" v-model="nuevo_Pendiente" >
 					<input type="button" @click="agregar(nuevo_Pendiente)" class="boton" id="btn-agregar" value="Agregar Tarea">
 				</form>
 			</div>
@@ -64,6 +64,9 @@
 					.then(()=>{
 						this.fetchPendientes();
 					});
+			},
+			noop(){
+				console.log('nelson dijo el mandela');
 			}
 
 		}
