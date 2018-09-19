@@ -65,9 +65,6 @@
 						this.fetchPendientes();
 					});
 			},
-			noop(){
-				console.log('nelson dijo el mandela');
-			}
 
 		}
 	}

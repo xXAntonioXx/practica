@@ -47416,9 +47416,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			axios.get(ruta).then(function () {
 				_this3.fetchPendientes();
 			});
-		},
-		noop: function noop() {
-			console.log('nelson dijo el mandela');
 		}
 	}
 });
