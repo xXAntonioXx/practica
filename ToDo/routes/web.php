@@ -11,7 +11,14 @@
 |
 */
 
-Route::get('/', 'PrincipalController@Cargar');
+
+//==========================================================================
+//aqui se carga el Login para despues mandar a validacion y mostrar la vista principal
+Route::get('/', 'PrincipalController@Login');
+Route::post('/main', 'PrincipalController@Cargar');
+
+//==========================================================================
+//aqui las API's para el crud de la aplicacion
 Route::post('/create', 'PrincipalController@Crear');
 Route::get('/delete/{id}','PrincipalController@Borrar');
 Route::get('/api/pendientes','PrincipalController@respuesta');

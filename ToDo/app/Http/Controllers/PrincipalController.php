@@ -10,13 +10,27 @@ class PrincipalController extends Controller
 
 	//public $contenido=Pendiente::all();
 
-    public function Cargar(){
-
+    public function Cargar(Request $req){
+        /*==================================================================
+            este metodo es para la vista principal de la aplicacion
+        ==================================================================*/
         //cuando uses blade usa la conexion que esta aqui abajo comentada
     	//$contenido=Pendiente::all();
 
     	//return view('main',['lista'=>$contenido,]);
-        return view('welcome');
+        if ($req['username'] == 'antonio' && $req['pass'] == 'contra') {
+            return view('welcome');
+        }else{
+            return view('login');
+        }
+        //return view('welcome');
+    }
+
+    public function Login(){
+        /*==================================================================
+            este metodo es para el login de acceso
+        ==================================================================*/
+        return view('login');
     }
 
     public function Crear(Request $req){
