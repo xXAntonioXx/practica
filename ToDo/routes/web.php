@@ -15,7 +15,7 @@
 //==========================================================================
 //aqui se carga el Login para despues mandar a validacion y mostrar la vista principal
 Route::get('/', 'PrincipalController@Login');
-Route::post('/main', 'PrincipalController@Cargar');
+Route::post('/main', 'PrincipalController@Cargar')->middleware('TrimStrings');
 
 //==========================================================================
 //aqui las API's para el crud de la aplicacion

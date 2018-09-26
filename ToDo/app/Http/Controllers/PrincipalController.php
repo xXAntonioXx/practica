@@ -18,10 +18,12 @@ class PrincipalController extends Controller
     	//$contenido=Pendiente::all();
 
     	//return view('main',['lista'=>$contenido,]);
+        $incorrecto = null;
         if ($req['username'] == 'antonio' && $req['pass'] == 'contra') {
             return view('welcome');
         }else{
-            return view('login');
+            $incorrecto="Nelson dijo el mandela";
+            return view('login',['error'=>$incorrecto]);
         }
         //return view('welcome');
     }
