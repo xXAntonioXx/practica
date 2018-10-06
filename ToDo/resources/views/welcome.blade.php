@@ -18,7 +18,7 @@
     </head>
     <body style="margin:0">
 
-        <div id="main">
+        <div id="main"> 
             <principal></principal>
         </div>
         <script src="{{ asset('js/app.js') }}"></script>

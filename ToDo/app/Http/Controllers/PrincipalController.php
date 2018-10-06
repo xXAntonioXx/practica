@@ -18,14 +18,15 @@ class PrincipalController extends Controller
     	//$contenido=Pendiente::all();
 
     	//return view('main',['lista'=>$contenido,]);
-        $incorrecto = null;
+        /*$incorrecto = null;
         if ($req['username'] == 'antonio' && $req['pass'] == 'contra') {
+            $_SESSION['nombre']=$req['username'];
             return view('welcome');
         }else{
             $incorrecto="Nelson dijo el mandela";
             return view('login',['error'=>$incorrecto]);
-        }
-        //return view('welcome');
+        }*/
+        return view('welcome');
     }
 
     public function Login(){
@@ -66,4 +67,5 @@ class PrincipalController extends Controller
 
         return $contenido;
     }
+
 }

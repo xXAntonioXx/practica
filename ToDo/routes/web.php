@@ -10,15 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+use App\Http\Middleware\CheckSess;
 
 //==========================================================================
 //aqui se carga el Login para despues mandar a validacion y mostrar la vista principal
 Route::get('/', 'PrincipalController@Login');
-Route::post('/main', 'PrincipalController@Cargar')->middleware('TrimStrings');
+Route::post('/main', 'PrincipalController@Cargar')->middleware(CheckSess::class);
 
 //==========================================================================
 //aqui las API's para el crud de la aplicacion
 Route::post('/create', 'PrincipalController@Crear');
 Route::get('/delete/{id}','PrincipalController@Borrar');
-Route::get('/api/pendientes','PrincipalController@respuesta');
+Route::get('/api/pendientes','PrincipalController@respuesta')->middleware(CheckSess::class);
