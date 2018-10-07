@@ -25,15 +25,17 @@ class PrincipalController extends Controller
         /*==================================================================
             este metodo es para el login de acceso
         ==================================================================*/
-        if(isset($_GET['option']) && $_GET['option']=='terminar'){
-            session_start();
-            session_destroy();
-        }
         return view('login');
     }
 
-    public function Crear(Request $req){
+    //=================================================================================================
+    //apartir de aqui empieza el crud
+    //=================================================================================================
 
+    public function Crear(Request $req){
+        /*==================================================================
+            creas un nuevo pendiente y lo insertas en la base de datos
+        ==================================================================*/
     	$this->validate($req,[
     		'tareaInput'=>'required'
     	]);
@@ -41,16 +43,13 @@ class PrincipalController extends Controller
     	$pendiente = Pendiente::create([
     		'pendiente'=>$req['tareaInput']
     	]);
-
-    	//return redirect('/');
-
-    	//primero vamos a intentar hacer la validacion de datos
-    	//el pendiente no debe ser mas largo que 150 chars.
-    	
     	
     }
 
     public function Borrar($ID){
+        /*==================================================================
+            elimina un pendiente en base al id
+        ==================================================================*/
 
     	Pendiente::where('id',$ID)->delete();
 
@@ -59,6 +58,9 @@ class PrincipalController extends Controller
     }
 
     public function respuesta(){
+        /*==================================================================
+            una consulta a la base de datos para buscar los pendientes
+        ==================================================================*/
         $contenido=Pendiente::all();
 
         return $contenido;
