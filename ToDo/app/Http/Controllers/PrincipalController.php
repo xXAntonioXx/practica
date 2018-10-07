@@ -18,14 +18,6 @@ class PrincipalController extends Controller
     	//$contenido=Pendiente::all();
 
     	//return view('main',['lista'=>$contenido,]);
-        /*$incorrecto = null;
-        if ($req['username'] == 'antonio' && $req['pass'] == 'contra') {
-            $_SESSION['nombre']=$req['username'];
-            return view('welcome');
-        }else{
-            $incorrecto="Nelson dijo el mandela";
-            return view('login',['error'=>$incorrecto]);
-        }*/
         return view('welcome');
     }
 
@@ -33,6 +25,10 @@ class PrincipalController extends Controller
         /*==================================================================
             este metodo es para el login de acceso
         ==================================================================*/
+        if(isset($_GET['option']) && $_GET['option']=='terminar'){
+            session_start();
+            session_destroy();
+        }
         return view('login');
     }
 
