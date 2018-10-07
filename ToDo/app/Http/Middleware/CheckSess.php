@@ -19,11 +19,6 @@ class CheckSess
         if(isset($_SESSION['nombre'])){
             return $next($request);
         }
-        if($request['username']=='antonio' && $request['pass']=='contra'){
-            
-            $_SESSION['nombre']=$request['username'];
-            return $next($request);
-        }
         
         return redirect('/');
         

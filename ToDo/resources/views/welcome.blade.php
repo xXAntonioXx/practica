@@ -18,7 +18,7 @@
     </head>
     <body style="margin:0">
         <nav>
-        <a href="/?option=terminar">salir</a>
+        <a href="/salir">salir</a>
         </nav>
         <div id="main"> 
             <principal></principal>
