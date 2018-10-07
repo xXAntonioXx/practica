@@ -15,6 +15,7 @@ use App\Http\Middleware\CheckSess;
 //==========================================================================
 //aqui se carga el Login para despues mandar a validacion y mostrar la vista principal
 Route::get('/', 'PrincipalController@Login');
+
 Route::post('/main', 'PrincipalController@Cargar')->middleware(CheckSess::class);
 
 //==========================================================================
