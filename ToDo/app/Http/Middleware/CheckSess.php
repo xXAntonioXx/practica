@@ -19,7 +19,7 @@ class CheckSess
         if(isset($_SESSION['nombre'])){
             return $next($request);
         }
-        
+        session_destroy();
         return redirect('/');
         
     }
