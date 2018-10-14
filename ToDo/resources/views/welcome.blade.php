@@ -20,6 +20,7 @@
     <body style="margin:0">
         <nav class="navi">
             <a href="/salir">salir</a>
+            <a href="">subir archivo</a>
         </nav>
         <div id="main"> 
             <principal></principal>
