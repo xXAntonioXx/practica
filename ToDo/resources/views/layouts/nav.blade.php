@@ -1,4 +1,4 @@
-<!--doctype html>
+<!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8">
@@ -10,10 +10,10 @@
 
         <title>Cosas por hacer</title>
 
-        <!-- Fonts >
+        <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 
-        <!-- Styles >
+        <!-- Styles -->
         
         </style>
     </head>
@@ -21,15 +21,12 @@
         <nav class="navi">
             <div>
                 <a href="/salir">salir</a>
-                <a href="">subir archivo</a>
+                <a href="/upload">subir archivo</a>
             </div>
-        </nav-->
-        @extends('layouts.nav')
-        @section('content')
-        <div id="main"> 
-            <principal></principal>
-        </div>
-        <script src="{{ asset('js/app.js') }}"></script>
-        @stop
-    <!--/body>
-</html-->
+        </nav>
+
+        @yield('content')
+
+
+    </body>
+</html>

@@ -22,6 +22,9 @@ Route::get('/main','PrincipalController@Cargar')->middleware(CheckSess::class);/
 
 Route::get('/salir','UsuarioController@CerrarSess'); //cierra la sesion y redirecciona al login
 
+Route::get('/upload',function(){
+    return view('upload');
+});
 //==========================================================================
 //aqui las API's para el crud de la aplicacion
 Route::group(['middleware'=>'CheckSess'],function(){
