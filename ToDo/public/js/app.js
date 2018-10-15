@@ -13879,7 +13879,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(43);
+module.exports = __webpack_require__(48);
 
 
 /***/ }),
@@ -47187,13 +47187,13 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(48)
+  __webpack_require__(40)
 }
-var normalizeComponent = __webpack_require__(40)
+var normalizeComponent = __webpack_require__(45)
 /* script */
-var __vue_script__ = __webpack_require__(41)
+var __vue_script__ = __webpack_require__(46)
 /* template */
-var __vue_template__ = __webpack_require__(42)
+var __vue_template__ = __webpack_require__(47)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -47233,309 +47233,46 @@ module.exports = Component.exports
 
 /***/ }),
 /* 40 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-/* globals __VUE_SSR_CONTEXT__ */
+// style-loader: Adds some css to the DOM by adding a <style> tag
 
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
+// load the styles
+var content = __webpack_require__(41);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(43)("e59945d8", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-49ef2df2\",\"scoped\":true,\"hasInlineConfig\":true}!./estilo_principal.css", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-49ef2df2\",\"scoped\":true,\"hasInlineConfig\":true}!./estilo_principal.css");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
 }
-
 
 /***/ }),
 /* 41 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	data: function data() {
-		return {
-			pendientes: {},
-			nuevo_Pendiente: ''
-			//nuevoElemento:false,
-		};
-	},
-	created: function created() {
-		this.fetchPendientes();
-	},
+exports = module.exports = __webpack_require__(42)(false);
+// imports
 
 
-	methods: {
-		fetchPendientes: function fetchPendientes() {
-			var _this = this;
+// module
+exports.push([module.i, "\n*[data-v-49ef2df2] {\r\n\tmargin: 0;\r\n\tpadding: 0;\r\n\t-webkit-box-sizing: border-box;\r\n\tbox-sizing: border-box;\n}\nbody[data-v-49ef2df2] {\r\n\tbackground: #FAFAFA;\r\n\tfont-family: arial, helvetica, sans-serif;\r\n\tfont-size: 16px;\n}\n.wrap[data-v-49ef2df2] {\r\n\tmargin: auto;\r\n\tmax-width: 800px;\r\n\twidth: 90%;\n}\n.principal[data-v-49ef2df2] {\r\n\tbackground: #F44336;\r\n\t/*border-top: 20px solid #D32F2F;*/\r\n\tcolor: #fff;\r\n\tpadding: 50px 0;\r\n\twidth: 100%;\n}\n.principal .formulario[data-v-49ef2df2] {\r\n\tcolor: #212121;\r\n\ttext-align: center;\n}\n.principal .formulario input[type=text][data-v-49ef2df2] {\r\n\tmargin-bottom: 20px;\r\n\tpadding: 10px;\r\n\twidth: 100%;\n}\n.principal .formulario input[type=text].error[data-v-49ef2df2] {\r\n\tborder: 5px solid #D32F2F;\r\n\tcolor: red;\n}\n.principal .formulario .boton[data-v-49ef2df2] {\r\n\tbackground: none;\r\n\tborder: 1px solid #D32F2F;\r\n\tcolor: #fff;\r\n\tdisplay: inline-block;\r\n\tfont-size: 16px;\r\n\tpadding: 15px;\n}\n.principal .formulario .boton[data-v-49ef2df2]:hover {\r\n\tborder: 1px solid #fff;\n}\r\n \r\n/* - Tareas - */\n.tareas .lista[data-v-49ef2df2] {\r\n\tlist-style: none;\n}\n.tareas .lista li[data-v-49ef2df2] {\r\n\tborder-bottom: 1px solid #B6B6B6;\n}\n.tareas .lista li a[data-v-49ef2df2] {\r\n\tcolor: #212121;\r\n\tdisplay: block;\r\n\tpadding: 20px 0;\r\n\ttext-decoration: none;\n}\n.tareas .lista li a[data-v-49ef2df2]:hover {\r\n\ttext-decoration: line-through;\n}", ""]);
 
-			fetch('api/pendientes').then(function (res) {
-				return res.json();
-			}).then(function (data) {
-				_this.pendientes = data;
-			});
-		},
-		agregar: function agregar(mensaje) {
-			var _this2 = this;
+// exports
 
-			axios.post('/create', { 'tareaInput': mensaje }).then(function () {
-				_this2.fetchPendientes();
-			});
-			//this.nuevoElemento=true;
-		},
-		eliminar: function eliminar(mensajeID) {
-			var _this3 = this;
-
-			var ruta = '/delete/' + mensajeID;
-			axios.get(ruta).then(function () {
-				_this3.fetchPendientes();
-			});
-		}
-	}
-});
 
 /***/ }),
 /* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "principal" }, [
-      _c("div", { staticClass: "wrap" }, [
-        _c(
-          "form",
-          {
-            staticClass: "formulario",
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                _vm.agregar(_vm.nuevo_Pendiente)
-              }
-            }
-          },
-          [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.nuevo_Pendiente,
-                  expression: "nuevo_Pendiente"
-                }
-              ],
-              attrs: {
-                type: "text",
-                name: "tareaInput",
-                placeholder: "Agrega tu tarea"
-              },
-              domProps: { value: _vm.nuevo_Pendiente },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.nuevo_Pendiente = $event.target.value
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "boton",
-              attrs: {
-                type: "button",
-                id: "btn-agregar",
-                value: "Agregar Tarea"
-              },
-              on: {
-                click: function($event) {
-                  _vm.agregar(_vm.nuevo_Pendiente)
-                }
-              }
-            })
-          ]
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "tareas" }, [
-      _c("div", { staticClass: "wrap" }, [
-        _c(
-          "ul",
-          { staticClass: "lista", attrs: { id: "listaDePendientes" } },
-          _vm._l(_vm.pendientes, function(pendiente) {
-            return _c("li", [
-              _c(
-                "a",
-                {
-                  on: {
-                    click: function($event) {
-                      _vm.eliminar(pendiente.id)
-                    }
-                  }
-                },
-                [
-                  _vm._v(
-                    "\n\t\t\t\t\t\t" +
-                      _vm._s(pendiente.pendiente) +
-                      "\n\t\t\t\t\t"
-                  )
-                ]
-              )
-            ])
-          })
-        )
-      ])
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-49ef2df2", module.exports)
-  }
-}
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 44 */,
-/* 45 */
 /***/ (function(module, exports) {
 
 /*
@@ -47617,49 +47354,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 46 */,
-/* 47 */,
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(49);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(50)("e59945d8", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-49ef2df2\",\"scoped\":true,\"hasInlineConfig\":true}!./estilo_principal.css", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-49ef2df2\",\"scoped\":true,\"hasInlineConfig\":true}!./estilo_principal.css");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(45)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n*[data-v-49ef2df2] {\r\n\tmargin: 0;\r\n\tpadding: 0;\r\n\t-webkit-box-sizing: border-box;\r\n\tbox-sizing: border-box;\n}\nbody[data-v-49ef2df2] {\r\n\tbackground: #FAFAFA;\r\n\tfont-family: arial, helvetica, sans-serif;\r\n\tfont-size: 16px;\n}\n.wrap[data-v-49ef2df2] {\r\n\tmargin: auto;\r\n\tmax-width: 800px;\r\n\twidth: 90%;\n}\n.principal[data-v-49ef2df2] {\r\n\tbackground: #F44336;\r\n\tborder-top: 20px solid #D32F2F;\r\n\tcolor: #fff;\r\n\tpadding: 50px 0;\r\n\twidth: 100%;\n}\n.principal .formulario[data-v-49ef2df2] {\r\n\tcolor: #212121;\r\n\ttext-align: center;\n}\n.principal .formulario input[type=text][data-v-49ef2df2] {\r\n\tmargin-bottom: 20px;\r\n\tpadding: 10px;\r\n\twidth: 100%;\n}\n.principal .formulario input[type=text].error[data-v-49ef2df2] {\r\n\tborder: 5px solid #D32F2F;\r\n\tcolor: red;\n}\n.principal .formulario .boton[data-v-49ef2df2] {\r\n\tbackground: none;\r\n\tborder: 1px solid #D32F2F;\r\n\tcolor: #fff;\r\n\tdisplay: inline-block;\r\n\tfont-size: 16px;\r\n\tpadding: 15px;\n}\n.principal .formulario .boton[data-v-49ef2df2]:hover {\r\n\tborder: 1px solid #fff;\n}\r\n \r\n/* - Tareas - */\n.tareas .lista[data-v-49ef2df2] {\r\n\tlist-style: none;\n}\n.tareas .lista li[data-v-49ef2df2] {\r\n\tborder-bottom: 1px solid #B6B6B6;\n}\n.tareas .lista li a[data-v-49ef2df2] {\r\n\tcolor: #212121;\r\n\tdisplay: block;\r\n\tpadding: 20px 0;\r\n\ttext-decoration: none;\n}\n.tareas .lista li a[data-v-49ef2df2]:hover {\r\n\ttext-decoration: line-through;\n}", ""]);
-
-// exports
-
-
-/***/ }),
-/* 50 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -47678,7 +47373,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(51)
+var listToStyles = __webpack_require__(44)
 
 /*
 type StyleObject = {
@@ -47887,7 +47582,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 51 */
+/* 44 */
 /***/ (function(module, exports) {
 
 /**
@@ -47918,6 +47613,308 @@ module.exports = function listToStyles (parentId, list) {
   return styles
 }
 
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 46 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			pendientes: {},
+			nuevo_Pendiente: ''
+			//nuevoElemento:false,
+		};
+	},
+	created: function created() {
+		this.fetchPendientes();
+	},
+
+
+	methods: {
+		fetchPendientes: function fetchPendientes() {
+			var _this = this;
+
+			fetch('api/pendientes').then(function (res) {
+				return res.json();
+			}).then(function (data) {
+				_this.pendientes = data;
+			});
+		},
+		agregar: function agregar(mensaje) {
+			var _this2 = this;
+
+			axios.post('/create', { 'tareaInput': mensaje }).then(function () {
+				_this2.fetchPendientes();
+			});
+			//this.nuevoElemento=true;
+		},
+		eliminar: function eliminar(mensajeID) {
+			var _this3 = this;
+
+			var ruta = '/delete/' + mensajeID;
+			axios.get(ruta).then(function () {
+				_this3.fetchPendientes();
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "principal" }, [
+      _c("div", { staticClass: "wrap" }, [
+        _c(
+          "form",
+          {
+            staticClass: "formulario",
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                _vm.agregar(_vm.nuevo_Pendiente)
+              }
+            }
+          },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.nuevo_Pendiente,
+                  expression: "nuevo_Pendiente"
+                }
+              ],
+              attrs: {
+                type: "text",
+                name: "tareaInput",
+                placeholder: "Agrega tu tarea"
+              },
+              domProps: { value: _vm.nuevo_Pendiente },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.nuevo_Pendiente = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "boton",
+              attrs: {
+                type: "button",
+                id: "btn-agregar",
+                value: "Agregar Tarea"
+              },
+              on: {
+                click: function($event) {
+                  _vm.agregar(_vm.nuevo_Pendiente)
+                }
+              }
+            })
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "tareas" }, [
+      _c("div", { staticClass: "wrap" }, [
+        _c(
+          "ul",
+          { staticClass: "lista", attrs: { id: "listaDePendientes" } },
+          _vm._l(_vm.pendientes, function(pendiente) {
+            return _c("li", [
+              _c(
+                "a",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.eliminar(pendiente.id)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n\t\t\t\t\t\t" +
+                      _vm._s(pendiente.pendiente) +
+                      "\n\t\t\t\t\t"
+                  )
+                ]
+              )
+            ])
+          })
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-49ef2df2", module.exports)
+  }
+}
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
