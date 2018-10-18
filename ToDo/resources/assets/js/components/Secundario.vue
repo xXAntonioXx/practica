@@ -1,5 +1,5 @@
 <template>
 	<div>
-		<h4>este el mensaje secundario</h4>
+		<input type="file" name="" id="">
 	</div>
 </template>

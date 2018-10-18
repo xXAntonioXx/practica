@@ -19,6 +19,8 @@
     </head>
     <body style="margin:0">
         <nav class="navi">
+            <a href="/main"><img id="icono" src="/imgs/laravelIcon.png" alt=""></a>
+            
             <div>
                 <a href="/salir">salir</a>
                 <a href="/upload">subir archivo</a>

@@ -22,9 +22,12 @@ Route::get('/main','PrincipalController@Cargar')->middleware(CheckSess::class);/
 
 Route::get('/salir','UsuarioController@CerrarSess'); //cierra la sesion y redirecciona al login
 
-Route::get('/upload',function(){
-    return view('upload');
-});
+
+//==========================================================================
+//paginas y todo lo que tiene que ver con el uso de archivos
+Route::get('/upload','FilesController@SubirArchivo')->middleware(CheckSess::class);
+
+Route::post('/api/uploadFile','FilesController@SubiendoArchivo');
 //==========================================================================
 //aqui las API's para el crud de la aplicacion
 Route::group(['middleware'=>'CheckSess'],function(){

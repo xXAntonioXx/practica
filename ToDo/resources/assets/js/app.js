@@ -27,5 +27,5 @@ Vue.component(
 
 const app = new Vue({
 	el: '#main',
-	el: '#second'
+	/*el: '#sec',*/
 });
