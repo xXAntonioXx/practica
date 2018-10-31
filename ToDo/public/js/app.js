@@ -47920,7 +47920,7 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(11)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(54)
 /* template */
 var __vue_template__ = __webpack_require__(49)
 /* template functional */
@@ -47968,18 +47968,40 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            _vm.upFile()
+          }
+        }
+      },
+      [
+        _c(
+          "input",
+          _vm._g(
+            { attrs: { type: "file", id: "archivoPrueba" } },
+            _vm.file_archivo
+          )
+        ),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "submit", value: "agregar archivo" },
+          on: {
+            click: function($event) {
+              _vm.upFile(_vm.file_archivo)
+            }
+          }
+        })
+      ]
+    )
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("input", { attrs: { type: "file", name: "", id: "" } })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -47994,6 +48016,42 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			file_archivo: ''
+		};
+	},
+
+	methods: {
+		upFile: function upFile(archivoSubir) {
+			axios.post('/api/uploadFile', { 'archivoPrueba': archivoSubir }).then(function () {
+				alert('archivo subido');
+			});
+		}
+	}
+});
 
 /***/ })
 /******/ ]);
